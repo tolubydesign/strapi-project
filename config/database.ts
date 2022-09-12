@@ -13,11 +13,18 @@ export default ({ env }) => ({
       user: env("DATABASE_USERNAME", ""),
       password: env("DATABASE_PASSWORD", ""),
       schema: env('DATABASE_SCHEMA', 'public'), // Not required
-      ssl: {
-        rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
-      },
+      ssl: env('DATABASE_SSL', false),
+      // ssl: {
+      //   rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
+      // },
     },
-    pool: { min: 0 },
+    pool: {
+      min: 0,
+      max: 10,
+      idleTimeoutMillis: 30000,
+      createTimeoutMillis: 30000,
+      acquireTimeoutMillis: 30000
+    },
     useNullAsDefault: true,
     debug: false,
   },
