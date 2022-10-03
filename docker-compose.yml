@@ -1,17 +1,23 @@
 # resource
 # https://github.com/strapi/strapi-docker/blob/master/examples/prod/docker-compose.yml
 version: '3'
-
 services:
   strapi:
     image: strapi/strapi
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_NAME: strapi
-      DATABASE_HOST: postgres
+      DATABASE_HOST: "webapp:${DATABASE_HOST}"
       DATABASE_PORT: 5432
-      DATABASE_USERNAME: strapi
-      DATABASE_PASSWORD: strapi
+      DATABASE_USERNAME: "webapp:${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "webapp:${DATABASE_PASSWORD}"
+      #   host: env("DATABASE_HOST", process.env.DATABASE_HOST),
+      #   port: env.int("DATABASE_PORT", 5432),
+      #   database: env("DATABASE_NAME", "strapi"),
+      #   user: env("DATABASE_USERNAME", process.env.DATABASE_USERNAME),
+      #   password: env("DATABASE_PASSWORD", process.env.DATABASE_PASSWORD),
+      #   schema: env('DATABASE_SCHEMA', 'public'), // Not required
+      #   ssl: env('DATABASE_SSL', false),
     volumes:
       - ./app:/srv/app
     ports:
