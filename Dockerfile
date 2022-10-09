@@ -1,60 +1,62 @@
-# resource
-# https://github.com/strapi/strapi-docker
-
+# Reference: https://razinj.dev/how-to-run-strapi-4-in-a-docker-container-using-docker-compose/
+# FROM node:lts as strapi-app
 # FROM node:14
-      
-# LABEL org.label-schema.vendor="Strapi" \
-#       org.label-schema.name="Strapi Docker image" \
-#       org.label-schema.description="Strapi containerized" \
-#       org.label-schema.url="https://strapi.io" \
-#       org.label-schema.vcs-url="https://github.com/strapi/strapi-docker" \
-#       org.label-schema.version=latest \
-#       org.label-schema.schema-version="1.0" \
-#       multi.label1="value1" \
-#       multi.label2="value2" \
-#       other="value3"
 
-# WORKDIR /usr/src/api
+# # RUN mkdir -p /app && chown 1000:1000 -R /app
+
+# # Let WatchTower know to ignore this container for checking
+# LABEL com.centurylinklabs.watchtower.enable="false"
+
+# COPY ./package*.json ./
 
 # RUN npm install -g strapi
 
-# Stage 1
+# RUN npm install
+
+# RUN npm ci
+
+# COPY . .
+
+# ENV NODE_ENV production
+
+# RUN npm run build
+
+# EXPOSE 1337
+
+# CMD ["npm", "run", "develop"]
+
+# # RUN npm run build
+# ENTRYPOINT ["npm", "run", "build"]
+
+# docker build -t strapi-app .
+# docker run -it --rm -p 1337:80 strapi-app
+
+# FROM node:14 # FROM node:16-alpine
+# ARG NODE_ENV=development
+# ENV NODE_ENV=${NODE_ENV}
+# WORKDIR /strapi-project
+# COPY ./package.json ./
+# RUN npm install -g strapi
+# RUN npm install
+# RUN npm ci
+# COPY ./ .
+# RUN npm run build
+# EXPOSE 1337
+# CMD ["npm", "run", "develop"]
+####
+
 FROM node:14
-
-RUN mkdir -p /app && chown 1000:1000 -R /app
-
-WORKDIR /app
-
-COPY package.json /app
-
-RUN npm install -g strapi
-
+# Installing libvips-dev for sharp Compatibility
+# RUN apk update && apk add  build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+WORKDIR /strapi-project/
+COPY ./package.json ./package-lock.json ./
+ENV PATH /strapi-project/node_modules/.bin:$PATH
 RUN npm install
-
-COPY . /app
-
-# RUN npm run develop
+WORKDIR /strapi-project/app
+COPY ./ .
 RUN npm run build
-
-# stage 2
-
-
-
-RUN mkdir /srv/app && chown 1000:1000 -R /srv/app
-
-WORKDIR /srv/app
-
-VOLUME /srv/app
-
-COPY . .
-COPY docker-entrypoint.sh /usr/local/bin/
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-CMD ["strapi", "develop"]
-
 EXPOSE 1337
-
-
-# Build the app’s container image: docker build -t strapi .
-# Start an app container: docker run -dp 3000:3000 strapi
+EXPOSE 80
+CMD ["npm", "run", "develop"]
