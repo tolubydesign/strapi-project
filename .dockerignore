@@ -15,3 +15,10 @@
 *.zip
 
 *.md
+
+node_modules
+license.txt
+exports
+*.cache
+build
+.strapi-updater.json

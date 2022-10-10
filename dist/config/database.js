@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ({ env }) => {
-    console.log("env", JSON.stringify(env));
     return ({
         connection: {
             client: "postgres",
