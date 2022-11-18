@@ -1,7 +1,7 @@
 # Documentation
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 
-name: Development Build
+name: Production Build
 
 run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
@@ -9,14 +9,31 @@ run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 on:
   push:
     branches:
-      - development
+      - main
+      - "releases/**"
 
 env:
-  SERVER: development
+  SERVER: production
+
+# permissions:
+#   actions: read|write|none
+#   checks: read|write|none
+#   contents: read|write|none
+#   deployments: read|write|none
+#   id-token: read|write|none
+#   issues: read|write|none
+#   discussions: read|write|none
+#   packages: read|write|none
+#   pages: read|write|none
+#   pull-requests: read|write|none
+#   repository-projects: read|write|none
+#   security-events: read|write|none
+#   statuses: read|write|none
+# permissions: read-all|write-all
 
 jobs:
   build:
-    name: Build Website
+    name: Production Build of Website
     runs-on: ubuntu-latest
 
     steps:
