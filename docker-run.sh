@@ -10,4 +10,4 @@
 # docker run -d -it --rm -p 1337:1337 --name=strapi-app-container strapi-app
 
 docker build -t strapi-app .
-docker run --rm -p 1337:1337 -d strapi-app
+docker run -d -it --rm -p 1337:1337 strapi-app

@@ -66,10 +66,10 @@ RUN npm ci
 
 RUN npm run build
 
-EXPOSE 8080
+# EXPOSE 8080
 
-EXPOSE 80
+# EXPOSE 80
 
 EXPOSE 1337
 
-CMD ["npm", "run", "develop"]
+CMD ["npm", "run", "start"]
