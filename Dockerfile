@@ -62,13 +62,15 @@ COPY . /app
 
 # ENV PATH /node_modules/.bin:$PATH
 
-RUN npm ci
+RUN npm install
 
 RUN npm run build
 
 # EXPOSE 8080
 
 # EXPOSE 80
+
+USER app
 
 EXPOSE 1337
 

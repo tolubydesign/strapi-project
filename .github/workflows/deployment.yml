@@ -86,8 +86,6 @@ jobs:
         
       # https://aws.amazon.com/blogs/containers/create-a-ci-cd-pipeline-for-amazon-ecs-with-github-actions-and-aws-codebuild-tests/
   
-  # https://github.com/aws-actions/amazon-ecs-deploy-task-definition
-  # https://docs.github.com/pt/actions/deployment/deploying-to-your-cloud-provider/deploying-to-amazon-elastic-container-service
   deploy:
     name: Deploy To AWS
     runs-on: ubuntu-latest
