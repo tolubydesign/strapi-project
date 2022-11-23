@@ -56,13 +56,14 @@ WORKDIR /app
 COPY ./package.json /app
 COPY ./package-lock.json /app
 
-ENV NODE_ENV=${NODE_ENV}
+# ENV NODE_ENV=${NODE_ENV}
 
 COPY . /app
 
 # ENV PATH /node_modules/.bin:$PATH
 
-RUN npm install
+# RUN npm ci
+RUN npm i
 
 RUN npm run build
 
@@ -70,8 +71,9 @@ RUN npm run build
 
 # EXPOSE 80
 
-USER app
-
 EXPOSE 1337
 
 CMD ["npm", "run", "start"]
+
+# docker ps -a (return)
+# 3364ebca0cab   c3c9589d4554   "/bin/sh -c 'npm i'"   5 minutes ago   Exited (1) 4 minutes ago             laughing_tu
