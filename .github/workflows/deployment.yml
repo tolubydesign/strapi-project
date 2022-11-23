@@ -41,48 +41,48 @@ env:
   CONTAINER_NAME: ${{ secrets.GIT_CONTAINER_NAME }}
 
 jobs:
-  build:
-    name: Build Website
-    runs-on: ubuntu-latest
+  # build:
+  #   name: Build Website
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Environmental variables
-        env:
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Mona
-          MIDDLE_NAME: The
-          LAST_NAME: Octocat
-        run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+  #   steps:
+  #     - name: Environmental variables
+  #       env:
+  #         MY_VAR: Hi there! My name is
+  #         FIRST_NAME: Mona
+  #         MIDDLE_NAME: The
+  #         LAST_NAME: Octocat
+  #       run: |
+  #         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
 
-      - name: Check out repository
-        uses: actions/checkout@v3
+  #     - name: Check out repository
+  #       uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-          cache: "npm"
-          cache-dependency-path: "package-lock.json"
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "14"
+  #         cache: "npm"
+  #         cache-dependency-path: "package-lock.json"
 
-      #  https://github.com/actions/cache/blob/main/examples.md#node---npm
-      - name: Get npm cache directory
-        id: npm-cache-dir
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
-      - uses: actions/cache@v3
-        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
-        with:
-          path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+  #     #  https://github.com/actions/cache/blob/main/examples.md#node---npm
+  #     - name: Get npm cache directory
+  #       id: npm-cache-dir
+  #       run: |
+  #         echo "::set-output name=dir::$(npm config get cache)"
+  #     - uses: actions/cache@v3
+  #       id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+  #       with:
+  #         path: ${{ steps.npm-cache-dir.outputs.dir }}
+  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-
 
-      - name: Install Dependencies
-        run: npm i
+  #     - name: Install Dependencies
+  #       run: npm i
 
-      - name: Build Project
-        run: npm run build
+  #     - name: Build Project
+  #       run: npm run build
         
       # https://aws.amazon.com/blogs/containers/create-a-ci-cd-pipeline-for-amazon-ecs-with-github-actions-and-aws-codebuild-tests/
   
