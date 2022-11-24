@@ -53,8 +53,8 @@ FROM node:14
 RUN mkdir /app
 WORKDIR /app
 
-COPY ./package.json .
-COPY ./package-lock.json .
+# COPY ./package.json .
+# COPY ./package-lock.json .
 
 # ENV NODE_ENV=${NODE_ENV}
 
