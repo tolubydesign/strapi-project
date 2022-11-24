@@ -14,6 +14,12 @@ on:
 
 env:
   SERVER: production
+  AWS_REGION: ${{ secrets.GIT_AWS_REGION }}
+  ECR_REPOSITORY: ${{ secrets.GIT_ECR_REPOSITORY }}
+  ECS_SERVICE: ${{ secrets.GIT_ECS_SERVICE }}
+  ECS_CLUSTER: ${{ secrets.GIT_ECS_CLUSTER }}
+  ECS_TASK_DEFINITION: ${{ secrets.GIT_ECS_TASK_DEFINITION }}
+  CONTAINER_NAME: ${{ secrets.GIT_CONTAINER_NAME }}
 
 # permissions:
 #   actions: read|write|none
