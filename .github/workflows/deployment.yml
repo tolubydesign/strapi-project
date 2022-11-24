@@ -3,7 +3,7 @@
 
 name: Development Build - Deploy to Amazon ECS
 
-run-name: Development Build to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Development Build by @${{ github.actor }}. ID - ${{ inputs.build_id }}
 
 # on: [push]
 on:
