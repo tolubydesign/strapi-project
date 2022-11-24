@@ -6,10 +6,10 @@ name: Development Build - Deploy to Amazon ECS
 run-name: Development Build by @${{ github.actor }}. ID - ${{ inputs.build_id }}
 
 # on: [push]
-on:
-  push:
-    branches:
-      - development
+# on:
+#   push:
+#     branches:
+#       - development
 
 env:
   SERVER: development

@@ -50,16 +50,16 @@ FROM node:14
 # RUN apk update && apk add  build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev
 # ARG NODE_ENV=development
 
-# RUN mkdir /app
-# WORKDIR /app
+RUN mkdir /app
+WORKDIR /app
 
 # COPY ./package.json .
 # COPY ./package-lock.json .
 
 # ENV NODE_ENV=${NODE_ENV}
 
-# COPY . /app
-COPY . .
+# COPY . .
+COPY . /app
 
 # ENV PATH /node_modules/.bin:$PATH
 
